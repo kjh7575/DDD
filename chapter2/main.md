@@ -531,27 +531,6 @@ public class CancelOrderService {
 ---
 ## 2.5 요청 처리 흐름
 
-```mermaid
-sequenceDiagram
-    participant 공급사
-    participant WMS_IB as WMS (입고)
-    participant WMS_ST as WMS (재고)
-    participant 고객
-    participant WMS_OB as WMS (출고)
-    participant 배송사
-
-    공급사->>WMS_IB: 상품 납품
-    WMS_IB->>WMS_IB: 입고 등록 (DRAFT)
-    WMS_IB->>WMS_IB: 입고 완료 (COMPLETED)
-    WMS_IB->>WMS_ST: standby → available (재고 증가)
-
-    고객->>WMS_OB: 주문 발생
-    WMS_OB->>WMS_ST: available → allocation (재고 차감)
-    WMS_OB->>WMS_OB: 출고 처리 (DRAFT → SENT)
-    WMS_OB->>배송사: 배송 전송
-    WMS_OB->>WMS_ST: allocation 제거 (출고 완료)
-```
-
 요청 처리 흐름
 ```mermaid
 	sequenceDiagram
